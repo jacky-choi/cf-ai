@@ -1,5 +1,5 @@
 #:schema node_modules/wrangler/config-schema.json
-name = "rag-ai-tutorial"
+name = "cf-ai-chatbot"
 main = "src/index.js"
 compatibility_date = "2024-09-25"
 compatibility_flags = ["nodejs_compat"]
