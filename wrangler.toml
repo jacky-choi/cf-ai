@@ -109,6 +109,14 @@ enabled = true
 
 # Bind a Vectorize index. Use to store and query vector embeddings for semantic search, classification and other vector search use-cases.
 # Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#vectorize-indexes
-# [[vectorize]]
-# binding = "MY_INDEX"
-# index_name = "my-index"
+[[vectorize]]
+binding = "VECTOR_INDEX"
+index_name = "vector-index"
+
+[ai]
+binding = "AI"
+
+[[d1_databases]]
+binding = "DB" # available in your Worker on env.DB
+database_name = "database"
+database_id = "11ea7535-0d06-4383-a345-0498ed23d9dc"    

@@ -7,9 +7,33 @@
  *
  * Learn more at https://developers.cloudflare.com/workers/
  */
+import { html } from "hono/html";
+import { Hono } from "hono";
+import React from 'react';
+import { renderToString } from 'react-dom/server';
+import Home from './templates/Home.jsx';
 
-export default {
-	async fetch(request, env, ctx) {
-		return new Response('Hello World!');
-	},
-};
+const app = new Hono();
+
+app.post("/api/hello", async (c) => {
+	const formData = await c.req.parseBody();
+	const question = `Answer this question: ${formData.question} in less than 30 characters for lactose intolerant people.`;
+  	const answer = await c.env.AI.run("@cf/meta/llama-3.2-3b-instruct", {
+        messages: [{ role: "user", content: question }],
+  	});
+
+  	return c.html(
+			html`
+			<p>${formData.question}</p>
+			<p>${answer.response}</p>
+			`
+	)
+});
+
+app.get("/", async (c) => {
+	const html = renderToString(<Home name="Jackie" />);
+	return c.html(html);
+});
+
+export default app;
+
