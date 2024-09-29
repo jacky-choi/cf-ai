@@ -24,8 +24,10 @@ app.post("/api/hello", async (c) => {
 
   	return c.html(
 			html`
-			<p>${formData.question}</p>
-			<p>${answer.response}</p>
+			<div style="color:black;background-color:white;border:1px solid yellow;width:40%;margin:0 auto;padding:10px 5px;border-radius:5px">
+				<p>${formData.question}</p>
+				<p>${answer.response}</p>
+			</div>
 			`
 	)
 });
